@@ -69,3 +69,15 @@ This can be written with functions:
     def format_response(200, _message), do: nil
     def format_response(404, message), do: "Not found"
     def format_response(500, message), do: "Boom"
+
+## use "Bang" function (func!) to throw errors automatically
+
+    def delete(conn, %{"id" => topic_id}) do
+       # get!/2 and delete!/1 (!stand for BANG) automatically throws an error if something goes wrong
+       # so no case-handling needed here
+       Repo.get!(Topic, topic_id) |> Repo.delete!
+       # if get!/2 and delete!/1 succeed then go on here
+       conn
+       |> put_flash(:info, "Topic deleted!")
+       |> redirect(to: topic_path(conn, :index))
+    end
