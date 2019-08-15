@@ -83,3 +83,18 @@ This can be written with functions:
        |> put_flash(:info, "Topic deleted!")
        |> redirect(to: topic_path(conn, :index))
     end
+
+## Nested loops with generators/comprehension
+
+    iex> list = [1, 2, 3, 4]
+    iex> for n <- list, times <- 1..n, do: IO.puts "#{n} - #{times}"
+    1 - 1
+    2 - 1
+    2 - 2
+    3 - 1
+    3 - 2
+    3 - 3
+    4 - 1
+    4 - 2
+    4 - 3
+    4 - 4
